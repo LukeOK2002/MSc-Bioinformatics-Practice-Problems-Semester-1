@@ -139,6 +139,8 @@ def list_janitor_simple(input_list, n):
         list.remove(list[list_element])
     print(list)
 
+list_janitor_simple([3, 5, 6, 3, 2, 4, 1], 2)
+
 #A integer, n, is said to be perfect when the sum of all the proper divisors of n is equal
 #to n. For example, 28 is perfect because its proper divisors are 1, 2, 4, 7 and 14 and
 #1 + 2 + 4 + 7 + 14 = 28. Write a function that determines whether a positive integer is
