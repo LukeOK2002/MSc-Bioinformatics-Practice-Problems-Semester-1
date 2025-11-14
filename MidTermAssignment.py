@@ -9,13 +9,17 @@ def pig_latin(s):
                 elif index == len(item)-1 and char not in "!£$%^&*()?~#'@}][{-_.,|/":
                     new_string += char + "way "
                 elif index == len(item)-1 and char in "!£$%^&*()?~#'@}][{-_.,|/":
-                    new_string += "way" + char
+                    new_string += "way" + char + " "
         else:
             ending_append = ""
             vowel_index = 0
             starting_capitalisation = False
+            punctuation_list = []
             if item[0].isupper():
                 starting_capitalisation = True
+            for index, char in enumerate(item): #Checks whether character is a vowel or not, and appends its position to a list for future use
+                if char in "!£$%^&*()?~#'@}][{-_.,|/":
+                    punctuation_list.append(index)
             for index, char in enumerate(item): #Checks whether letter is a vowel or not, and if it is, records its position and stores previous letters in 'ending_append'
                 if char.lower() in "aeiou":
                     vowel_index = index
@@ -25,8 +29,13 @@ def pig_latin(s):
             for index, char in enumerate(item): #Interprets character positions as either: before the vowel, at the vowel, after the vowel, or after the vowel and at the end
                 if index < vowel_index:
                     continue
-                elif char in "!£$%^&*()?~#'@}][{-_.,|/": #Punctuation comes at the end of the word, so ending sequence can be executed here too
-                    new_string += ending_append + "ay" + char + " "
+                elif index in punctuation_list: #Checks punctuation position from previously created list, allows for the ending append to be added before the actual final index of the word
+                    if index == min(punctuation_list):
+                        new_string += ending_append + "ay" + char
+                    elif index in punctuation_list and index != max(punctuation_list) and index != min(punctuation_list): #For middle punctuation elements
+                        new_string += char
+                    elif index == max(punctuation_list): #For the end of punctuation series
+                        new_string += char + " "
                 elif index == vowel_index and starting_capitalisation:
                     new_string += char.upper()
                 elif index == vowel_index and index == len(item) - 1: #For cases where first vowel is at the end of the word
@@ -37,4 +46,3 @@ def pig_latin(s):
                     new_string += char + ending_append + "ay "
     print(new_string)
     return new_string
-
