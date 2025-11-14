@@ -1,3 +1,10 @@
+#This function converts standard English text into 'pig Latin' an argot/language game. i
+#In which the starting consonants of a word are transferred to the end, followed by appending 'ay'.
+#Should the word begin with a vowel, the word's order is unchanged and the suffix 'way' is added.
+#Under this function's transformation, capitalisation and punctuation are retained in their original order.
+
+#Author: Luke O'Keeffe
+
 def pig_latin(s):
     s_list = s.split()
     new_string = ""
